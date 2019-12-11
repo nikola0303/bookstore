@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#03a6f3">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/myBtn.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3"><a href="index.html" class="web-url"><h5><b>www.magicbook.com</b></h5></a></div>
+                    <div class="col-md-1">
+                        <img src="images/delivery-truck.png" width="35px" height="35px" style="float:right" alt="slide1">
+                    </div>
+                    <div class="col-md-6">
+                        <h5>don't miss: <b><i>FREE SHIPPING</i></b> for orders over <b><i>2500</i></b> RSD!!!</h5></div>
+                    <div class="col-md-2">
+                        <span class="ph-number">Info : 021 / 455 - 888</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-menu">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="navbar-item">
+                                <a href="index.html" class="nav-link">Home</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="products.html" class="nav-link">Products</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="about.html" class="nav-link">About</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="faq.html" class="nav-link">FAQ</a>
+                            </li>
+                            <li class="navbar-item">
+                            	<a href="#" onclick="logout();return false;" class="nav-link">Logout</a>
+                            </li>
+                            <li class="navbar-item">
+                            	<a href="#" data-toggle="modal" data-target="#modalUpdateUser" class="nav-link">My account</a>
+                            </li>
+                        </ul>
+                        <div class="cart my-2 my-lg-0">
+                        	<a href="#" onclick="showModalShoppingCartContent();return false;">
+		                    	<span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+		                        <span class="quntity" id="spanNumberOfBooksPurchased"></span>
+		                    </a>
+	                    </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <div class="breadcrumb">
+        <div class="container">
+            <a class="breadcrumb-item" href="index.html">Home page</a>
+            <span class="breadcrumb-item active">visitor</span>
+            <span class="breadcrumb-item active"><label id="currentlyActive"></label></span>
+        </div>
+    </div>
+
+	<section class="static about-sec">
+		<div class="container">
+			<div class="block accordian article">
+				<div class="row">
+					<div class="column" style="width: 100%; padding: 15px;">
+						<form id="searchForm" style="padding-bottom: 30px" class="form-inline my-2 my-lg-0">
+							<input name="searchTitle" class="form-control mr-sm-2" type="text" placeholder="title..." aria-label="Search"> 
+							<input name="searchAuthor" class="form-control mr-sm-2" type="text" placeholder="author..." aria-label="Search"> 
+							<a href="#" onclick="searchBooks();return false;"><span style="padding-left: 15px" class="fa fa-search"></span></a>
+						</form>
+						<label id="noBooksForBuyingLabel"></label>
+						<div class="recomended-sec">
+							<div id="bookItemsVisitor" class="row"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>	
+
+	<section class="product-sec">
+		<div class="modal" id="bookDetails" tabindex="-1" role="dialog"></div>
+    </section>
+    
+    <section class="static about-sec">
+		<div class="container">
+			<div class="col-xs-12">
+				<div class="row">
+					<div class="col-md-12">
+						<div id="divShoppingCartContent"></div>
+					</div>					
+				</div>
+			</div>
+		</div>
+	</section>
+    
+    <section class="product-sec">
+		<div id="modalUpdateUser" class="modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" style="color: orange">Update account</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="col-md-11">
+							<form action="javascript:updateAccount()" id="updateAccountForm" method="POST">
+								<div style="padding: 15px">
+									<input type="text" id="nameUpdateAccount" name="nameUpdate" placeholder="name" required> 
+									<span class="required-star" style="color: red">*</span>
+								</div>
+		
+								<div style="padding: 15px">
+									<input type="text" id="surnameUpdateAccount" name="surnameUpdate" placeholder="surname" required> 
+									<span class="required-star" style="color: red">*</span>
+								</div>
+		
+								<div style="padding: 15px">
+									<input type="text" id="addressUpdateAccount" name="addressUpdate" placeholder="address" required> 
+									<span class="required-star" style="color: red">*</span>
+								</div>
+		
+								<div style="padding: 15px">
+									<input type="number" id="phoneUpdateAccount" name="phoneUpdate" placeholder="phone" required> 
+									<span class="required-star" style="color: red">*</span>
+								</div>
+								
+								<div style="padding: 15px" id="divValidationUpdateAccount"></div>
+		
+								<div class="col-md-2 col-md-3">
+									<button class="btn black" id="btnUpdate" type="submit">Update</button>
+								</div>
+							</form>	
+							
+							<form action="javaScript:changePassword()" id="changePasswordForm" method="POST">
+								<div class="panel">
+									<div class="headline-wrapper">
+										<div style="padding-top: 30px; padding-left: 15px">
+											<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne4" style="color:orange"><i>Change password</i></a>
+										</div>
+									</div>
+	
+									<div id="collapseOne4" class="collapse">
+										<div class="content">
+											<div class="panel-group" id="citystore-content-4">
+												<div class="panel">
+													<div class="panel-inner">
+														<div style="padding: 15px">
+															<input type="password" id="passwordUpdateAccount" name="passwordUpdate" placeholder="password" required> 
+															<span class="required-star" style="color: red">*</span>
+														</div>
+														
+														<div style="padding: 15px">
+															<input type="password" id="passwordUpdateAccount2" name="passwordUpdate2" placeholder="reenter password" required> 
+															<span class="required-star" style="color: red">*</span>
+														</div>
+														
+														<div style="padding: 15px" id="divValidationChangePassword"></div>
+														
+														<div class="col-md-2 col-md-3">
+															<button class="btn yellow" type="submit">Change</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+							
+							<form action="javaScript:deactivateAccount()" method="POST">
+								<div class="panel">
+									<div class="headline-wrapper">
+										<div style="padding-top: 30px; padding-left: 15px">
+											<a class="panel-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne5" style="color:orange"><i>Deactivate account</i></a>
+										</div>
+									</div>
+	
+									<div id="collapseOne5" class="collapse">
+										<div class="content">
+											<div class="panel-group" id="citystore-content-4">
+												<div class="panel">
+													<div class="panel-inner">
+														<div style="padding: 15px">
+															<p><i>Are you sure you want to deactivate your user account?</i></p>
+														</div>
+														
+														<div class="col-md-2 col-md-3">
+															<button class="btn yellow" type="submit">Yes</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="address">
+                        <h4>Our Address</h4>
+                        <h6>MagicBook, Boulevard of Europe 162, Serbia</h6>
+                        <h6>021 / 455 - 888</h6>
+                        <h6>email : www.magicbook.com</h6>
+                    </div>
+                    <div class="timing">
+                        <h4>Timing</h4>
+                        <h6>Mon - Fri: 8am - 10pm</h6>
+                        <h6>​​Saturday: 10am - 8pm</h6>
+                        <h6>​Sunday: 10am - 6pm</h6>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="navigation">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="terms-conditions.html">Terms & conditions</a></li>
+                            <li><a href="products.html">Products</a></li>
+                        </ul>
+                    </div>
+                    <div class="navigation">
+                        <h4>Help</h4>
+                        <ul>
+                            <li><a href="shipping.html">Shipping & returns</a></li>
+                            <li><a href="privacy-policy.html">Privacy policy</a></li>
+                            <li><a href="faq.html">FAQ’s</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form">
+                        <h3>Quick Contact us</h3>
+                        <h6>If you have any comments, compliments, questions, etc, you can contact us via message.</h6>
+                        <form action="javascript:sendMessage()" id="sendMessageForm" method="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="nameAndSurname" placeholder="name and surname" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="email" placeholder="email" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea name="message" placeholder="message"></textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn black" id="btnSendMessage" type="submit">Send message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>(C) 2019. All Rights Reserved.</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="share align-middle">
+                            <span class="fb"><i class="fa fa-facebook-official"></i></span>
+                            <span class="instagram"><i class="fa fa-instagram"></i></span>
+                            <span class="twitter"><i class="fa fa-twitter"></i></span>
+                            <span class="pinterest"><i class="fa fa-pinterest"></i></span>
+                            <span class="google"><i class="fa fa-google-plus"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="images/uppButton.png" width="20px" height="20"/></button>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="js/myJS/sharedFunctionalities.js"></script>
+    <script src="js/myJS/user.js"></script>
+    <script src="js/myJS/visitor.js"></script>
+    <script src="js/myJS/message.js"></script>
+    <script src="js/myJS/myBtn.js"></script>
+</body>
+
+</html>
